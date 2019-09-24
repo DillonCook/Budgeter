@@ -61,6 +61,25 @@ const budgetController = (() => { // =================================== Budget 
         testing: () => {
             console.log(data);
         },
+
+        deleteItem: (type, id) => {
+            let ids, index;
+
+            ids = data.allItems[type].map((current) => {
+                return current.id;
+            });
+
+            index = ids.indexOf(id);
+
+            console.log(index);
+            
+
+            if (index !== -1) {
+                data.allItems[type].splice(index, 1);
+            }
+            
+
+        },
         
         calculateBudget: () => {
 
@@ -108,7 +127,8 @@ const UIController = (() => { // =============================== UI Control ====
         incomeLabel: '.budget__income--value',
         expensesLabel: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
-        listItemPercentage: '.item__percentage'
+        listItemPercentage: '.item__percentage',
+        container: '.container'
 
     }
         return {
@@ -124,12 +144,12 @@ const UIController = (() => { // =============================== UI Control ====
                 // Create HTML string with placeholder text
                 if (type === 'inc') {
                     element = DOMstrings.incomeContainer;
-                    html = `<div class="item" id="income-${obj.id}"><div class="item__description">${obj.description}</div><div class="right">
+                    html = `<div class="item" id="inc-${obj.id}"><div class="item__description">${obj.description}</div><div class="right">
                 <div class="item__value">+ ${obj.value}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                 </div></div></div>`;
                 } else if (type === 'exp') {
                     element = DOMstrings.expenseContainer;
-                    html = `<div class="item" id="expense-${obj.id}"><div class="item__description">${obj.description}</div>
+                    html = `<div class="item" id="exp-${obj.id}"><div class="item__description">${obj.description}</div>
                 <div class="right"><div class="item__value">- ${obj.value}</div><div class="item__percentage">21%</div>
                 <div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                 </div></div></div>`;
@@ -184,6 +204,8 @@ const controller = ((budgetCtrl, UICtrl) => {
                     ctrlAddItem();                
             }
         });
+
+        document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
     }
 
     const updateBudget = () => {
@@ -218,8 +240,6 @@ const controller = ((budgetCtrl, UICtrl) => {
 
             // calculate and update budget
             updateBudget();
-
-
         } else {
             let fields = document.querySelectorAll(DOM.inputDescription + ', ' + DOM.inputDollarAmount);
             fields.forEach(field => {
@@ -230,6 +250,30 @@ const controller = ((budgetCtrl, UICtrl) => {
             });
         }    
     };
+
+
+    let ctrlDeleteItem = (e) => {
+
+        let itemID, splitID, type, ID;
+        itemID = e.target.parentNode.parentNode.parentNode.parentNode.id;
+
+        if (itemID) {
+            splitID = itemID.split('-');
+            type = splitID[0];
+            ID = parseInt(splitID[1]);
+            
+                        
+            // delete item from data structure
+            budgetCtrl.deleteItem(type, ID)
+
+            // delete item from UI
+
+
+            // update new totals
+        }
+        
+
+    }
         
 
     return {
