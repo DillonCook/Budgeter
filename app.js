@@ -139,6 +139,7 @@ const UIController = (() => { // =============================== UI Control ====
                     value: parseFloat(document.querySelector(DOMstrings.inputDollarAmount).value)
                 };
             },
+
             addListItem: (obj, type) => {
                 let html, element;
                 // Create HTML string with placeholder text
@@ -157,6 +158,14 @@ const UIController = (() => { // =============================== UI Control ====
                 
                 // Insert HTML into DOM
                 document.querySelector(element).insertAdjacentHTML('beforeend', html);
+            },
+
+            deleteListItem: (selectorID) => {
+                let el = document.getElementById(selectorID);
+
+                el.parentNode.removeChild(el);
+
+
             },
 
             // Resets values after submission
@@ -267,9 +276,10 @@ const controller = ((budgetCtrl, UICtrl) => {
             budgetCtrl.deleteItem(type, ID)
 
             // delete item from UI
-
+            UICtrl.deleteListItem(itemID);
 
             // update new totals
+            updateBudget();
         }
         
 
