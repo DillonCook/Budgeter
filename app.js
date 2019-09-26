@@ -272,6 +272,16 @@ const UIController = (() => { // =============================== UI Control ====
 
             },
 
+            changedType: () => {
+
+                let field = document.querySelector(DOMstrings.inputType);
+                field.classList.toggle('red-focus');
+
+                document.querySelector(DOMstrings.inputBtn).classList.toggle('red');
+
+
+            },
+
             getDOMstrings: () => {
                 return DOMstrings;
             }
@@ -295,6 +305,8 @@ const controller = ((budgetCtrl, UICtrl) => {
         });
 
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
     }
 
     const updateBudget = () => {
