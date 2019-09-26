@@ -154,7 +154,8 @@ const UIController = (() => { // =============================== UI Control ====
         expensesLabel: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
         listItemPercentage: '.item__percentage',
-        container: '.container'
+        container: '.container',
+        dateLabel: '.budget__title--month'
 
     }
         return {
@@ -166,18 +167,38 @@ const UIController = (() => { // =============================== UI Control ====
                 };
             },
 
+            formatNumber: (num) => {
+                let numSplit, int, dec;
+
+                num = Math.abs(num);
+                num = num.toFixed(2);
+                numSplit = num.split('.');
+
+                int = numSplit[0];
+                if (int.length > 3) {
+                    int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3); // input 2145, output 2,145
+                }
+
+                dec = numSplit[1];
+
+                return int + '.' + dec;
+
+            },
+
             addListItem: (obj, type) => {
                 let html, element;
+                let newValue = UIController.formatNumber(obj.value);
+
                 // Create HTML string with placeholder text
                 if (type === 'inc') {
                     element = DOMstrings.incomeContainer;
                     html = `<div class="item" id="inc-${obj.id}"><div class="item__description">${obj.description}</div><div class="right">
-                <div class="item__value">+ ${obj.value}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                <div class="item__value">+ ${newValue}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                 </div></div></div>`;
                 } else if (type === 'exp') {
                     element = DOMstrings.expenseContainer;
                     html = `<div class="item" id="exp-${obj.id}"><div class="item__description">${obj.description}</div>
-                <div class="right"><div class="item__value">- ${obj.value}</div><div class="item__percentage">21%</div>
+                <div class="right"><div class="item__value">- ${newValue}</div><div class="item__percentage">21%</div>
                 <div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                 </div></div></div>`;
                 }                
@@ -207,9 +228,9 @@ const UIController = (() => { // =============================== UI Control ====
 
             displayBudget: (obj) => {
 
-                document.querySelector(DOMstrings.budgetLabel).textContent = '$' + obj.budget;
-                document.querySelector(DOMstrings.incomeLabel).textContent = '$' + obj.totalInc;
-                document.querySelector(DOMstrings.expensesLabel).textContent = '$' + obj.totalExp;
+                document.querySelector(DOMstrings.budgetLabel).textContent = '$' + UIController.formatNumber(obj.budget);
+                document.querySelector(DOMstrings.incomeLabel).textContent = '$' + UIController.formatNumber(obj.totalInc);
+                document.querySelector(DOMstrings.expensesLabel).textContent = '$' + UIController.formatNumber(obj.totalExp);
 
                 if (obj.percentage > 0) {
                     document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage + '%';
@@ -237,6 +258,17 @@ const UIController = (() => { // =============================== UI Control ====
                         current.textContent = '--';
                     }
                 });
+
+            },
+
+            displayMonth: () => {
+
+                let now = new Date();
+
+                const year = now.getFullYear();
+                const month = now.toLocaleString('default', { month: 'long' });
+
+                document.querySelector(DOMstrings.dateLabel).textContent = month + ' ' + year;
 
             },
 
@@ -359,7 +391,8 @@ const controller = ((budgetCtrl, UICtrl) => {
     return {
         init: () => {
             console.log('Initiated');
-            eventListeners();  
+            eventListeners();
+            UICtrl.displayMonth();
             UICtrl.displayBudget({
                 budget: 0,
                 totalInc: 0,
