@@ -193,13 +193,13 @@ const UIController = (() => { // =============================== UI Control ====
                 if (type === 'inc') {
                     element = DOMstrings.incomeContainer;
                     html = `<div class="item" id="inc-${obj.id}"><div class="item__description">${obj.description}</div><div class="right">
-                <div class="item__value">+ ${newValue}</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                <div class="item__value">+ ${newValue}</div><div class="item__delete"><button class="item__delete--btn"><i class="far fa-times-circle"></i></button>
                 </div></div></div>`;
                 } else if (type === 'exp') {
                     element = DOMstrings.expenseContainer;
                     html = `<div class="item" id="exp-${obj.id}"><div class="item__description">${obj.description}</div>
                 <div class="right"><div class="item__value">- ${newValue}</div><div class="item__percentage">21%</div>
-                <div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
+                <div class="item__delete"><button class="item__delete--btn"><i class="far fa-times-circle"></i></button>
                 </div></div></div>`;
                 }                
                 
