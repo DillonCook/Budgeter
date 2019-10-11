@@ -1,3 +1,17 @@
+// Make sure sw is supported
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+        .register('sw.js')
+        .then(registration => {
+            console.log('SW registered');
+        })
+        .catch(error => console.log(`Service Worker: Error: ${error}`))
+    })
+    
+}
+
+
 const budgetController = (() => { // =================================== Budget Control =======================================
 
     class Expense {
