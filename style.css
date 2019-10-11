@@ -27,7 +27,7 @@ body {
 **********************************************/
 
 .top {
-    height: 45vh;
+    height: 55%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(back.png);
     background-size: cover;
     background-position: center;
@@ -45,24 +45,21 @@ body {
 }
 
 .budget__title {
-    font-size: 4.7rem;
+    font-size: 2rem;
     text-align: center;
-    margin-bottom: 10px;
     font-weight: 300;
 }
 
 .budget__value {
     font-weight: 300;
-    font-size: 6rem;
+    font-size: 3.25rem;
     text-align: center;
-    margin-bottom: 25px;
     letter-spacing: 2px;
 }
 
 .budget__income,
 .budget__expenses {
-    height: 200px;
-    font-size: 4rem;
+    height: 70px;
     display: flex;
     justify-content: space-around;
     padding: 20px;
@@ -71,7 +68,6 @@ body {
 }
 
 .budget__income {
-    margin-bottom: 10px;
     background-color: #28B9B5;
 }
 
@@ -81,20 +77,20 @@ body {
 
 .budget__income--text,
 .budget__expenses--text {
-    font-size: 3rem;
+    font-size: 1.2rem;
     color: #444;
     margin: auto 0;
 }
 
 .budget__income--value,
 .budget__expenses--value {
-    letter-spacing: 3px;
     margin: auto;
+    font-size: 1.5rem;
 }
 
 .budget__income--percentage,
 .budget__expenses--percentage {
-    font-size: 2.5rem;
+    font-size: 1rem;
     padding: 3px;
     margin: auto;
 }
@@ -103,6 +99,7 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     text-align: center;
     border-radius: 3px;
+    margin-left: 3px;
 }
 
 
@@ -114,7 +111,7 @@ body {
 .add {
     border-bottom: 1px solid #e7e7e7;
     background-color: #f7f7f7;
-    height: 20vh;
+    height: 150px;
 }
 
 .add__container {
@@ -126,10 +123,10 @@ body {
 }
 
 .add__type {
-    border-radius: 20px;
+    border-radius: 50px;
     border: 1px solid #e7e7e7;
-    font-size: 4rem;
-    text-indent: 2rem;
+    font-size: 2rem;
+    text-indent: 1rem;
     color: inherit;
     background-color: #fff;
     font-weight: 300;
@@ -148,13 +145,19 @@ body {
     background-color: #fff;
     color: inherit;
     font-family: inherit;
-    font-size: 4rem;
-    border-radius: 20px;
+    font-size: 2rem;
+    border-radius: 50px;
     transition: border 0.3s;
     text-align: center;
     margin: auto;
     width: 75%;
     height: 80%;
+}
+
+.add__description::placeholder,
+.add__value::placeholder {
+    color: rgb(173, 173, 173);
+    font-weight: lighter;
 }
 
 .add__description { 
@@ -169,7 +172,7 @@ body {
 }
 
 .add__btn {
-    font-size: 6.5rem;
+    font-size: 3.5rem;
     background: none;
     border: none;
     color: #28B9B5;
@@ -198,7 +201,7 @@ body {
     width: 100%;
     flex-direction: column;
     margin: 60px 0;
-    font-size: 4rem;
+    font-size: 2rem;
 }
 .income,
 .expenses {
@@ -238,14 +241,13 @@ h2 {
 .item:nth-child(even) { background-color: #f7f7f7; }
 
 .item__value {
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .item__percentage {
     margin: auto 0 auto 20px;
-
-    transition: transform 0.3s;
-    font-size: 2rem;
+    transition: transform 0.3s ease;
+    font-size: 1rem;
     background-color: #FFDAD9;
     padding: 3px;
     border-radius: 5px;
@@ -264,20 +266,21 @@ h2 {
 }
 
 .item__delete--btn {
-    font-size: 4rem;
+    font-size: 2rem;
     background: none;
     border: none;
     cursor: pointer;
     display: inline-block;
     vertical-align: middle;
     line-height: 1;
-    display: none;
+    opacity: 0;
+    transition: all .3s ease;
 }
 
 .item__delete--btn:focus { outline: none; }
 .item__delete--btn:active { transform: translateY(2px); }
 
-.item:hover .item__delete--btn { display: block;}
+.item:hover .item__delete--btn { opacity: 1; }
 .item:hover .item__value { transform: translateX(-50px); }
 .item:hover .item__percentage { transform: translateX(-50px); }
 
@@ -293,39 +296,137 @@ h2 {
 .unpaid:hover .item__description { font-weight: 900; }
 
 
-/* @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        justify-content: center;
-    }
 
-    .income,
-    .expenses {
-        margin: 0 auto 75px;
-        width: 65%;
-    }
-} */
+
+
 
 @media (min-width: 768px) {
-    
+    .top {
+        height: 50%;
+    }
     .budget__title {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
+        margin-bottom: 0;
     }
 
     .budget__value {
-        font-size: 6.5rem;
+        font-size: 4.5rem;
     }
 
     .budget__income,
     .budget__expenses {
-        height: 125px;
-        width: 750px;
+        height: 75px;
+        width: 75%;
+        max-width: 500px;
         margin: 0 auto;
-        font-size: 4rem;
+        font-size: 2rem;
         display: flex;
         justify-content: space-around;
         padding: 20px;
         text-transform: uppercase;
         border-radius: 100px;
     }
+    .budget__income--text,
+    .budget__expenses--text {
+        font-size: 2rem;
+    }
+
+    .budget__income--percentage,
+    .budget__expenses--percentage {
+        font-size: 1.5rem;
+    }
+
+    .add {
+        height: 75px;
+    }
+    .add__container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .add__description,
+    .add__value,
+    .add__type {
+        height: 70%;
+        font-size: 1.7rem;
+        border-radius: 30px;
+    }
+    .add__description {
+        max-width: 650px;
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+    .add__value {
+        max-width: 250px;
+        grid-column: 3/4;
+        grid-row: 1/2;
+    }
+    .add__type {
+        max-width: 100px;
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+    .add__btn {
+        font-size: 3.5rem;
+        grid-column: 4/5;
+        grid-row: 1/2;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        margin: 0;
+        justify-content: space-around;
+    }
+
+    .income,
+    .expenses {
+        width: 50%;
+    }
+
+    .income__title,
+    .expenses__title {
+        font-size: 2.75rem;
+    }
+
+    .item {
+        font-size: 1.5rem;
+        justify-content: space-between;
+    }
+
+    .item__description {
+        margin-left: 20px;
+    }
+
+    .item__delete--btn {
+        font-size: 2rem;
+    }
+
+    .item__percentage {
+        font-size: 1rem;
+    }
+    .item:hover .item__value { transform: translateX(-20px); }
+    .item:hover .item__percentage { transform: translateX(-20px); }
+}
+
+@media (min-width: 1024px) {
+
+    .income,
+    .expenses {
+        width: 45%;
+        max-width: 700px;
+    }
+
+    .item__description {
+        margin-left: 50px;
+    }
+
+    .item__delete--btn {
+        margin-right: 20px;
+    }
+
 }
