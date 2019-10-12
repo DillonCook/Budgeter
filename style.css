@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Yantramanav', sans-serif;
 }
 
 body {
@@ -28,7 +29,8 @@ body {
 
 .top {
     height: 55%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(back.png);
+    min-height: 313px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(back_mobile.png);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -48,6 +50,7 @@ body {
     font-size: 2rem;
     text-align: center;
     font-weight: 300;
+    text-shadow: 0 2px 5px black;
 }
 
 .budget__value {
@@ -55,16 +58,21 @@ body {
     font-size: 3.25rem;
     text-align: center;
     letter-spacing: 2px;
+    text-shadow: 0 2px 5px black;
 }
 
 .budget__income,
 .budget__expenses {
-    height: 70px;
+    height: 65px;
     display: flex;
     justify-content: space-around;
     padding: 20px;
     text-transform: uppercase;
     border-radius: 100px;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .budget__income {
@@ -77,7 +85,7 @@ body {
 
 .budget__income--text,
 .budget__expenses--text {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: #444;
     margin: auto 0;
 }
@@ -91,7 +99,7 @@ body {
 .budget__income--percentage,
 .budget__expenses--percentage {
     font-size: 1rem;
-    padding: 3px;
+    padding: 0 3px;
     margin: auto;
 }
 
@@ -297,12 +305,13 @@ h2 {
 
 
 
-
+/* =========================== Media Query ========================== */
 
 
 @media (min-width: 768px) {
     .top {
         height: 50%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(back.png);
     }
     .budget__title {
         font-size: 2.5rem;
@@ -316,10 +325,6 @@ h2 {
     .budget__income,
     .budget__expenses {
         height: 75px;
-        width: 75%;
-        max-width: 500px;
-        margin: 0 auto;
-        font-size: 2rem;
         display: flex;
         justify-content: space-around;
         padding: 20px;
@@ -327,13 +332,15 @@ h2 {
         border-radius: 100px;
     }
     .budget__income--text,
-    .budget__expenses--text {
+    .budget__expenses--text,
+    .budget__income--value,
+    .budget__expenses--value {
         font-size: 2rem;
     }
 
     .budget__income--percentage,
     .budget__expenses--percentage {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 
     .add {
